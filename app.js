@@ -1,8 +1,12 @@
 const express = require("express");
+const cors = require("cors");
 const app = express();
-const PORT = process.env.PORT || 3000; 
+const PORT = process.env.PORT || 3000;
+
+app.use(cors());
 
 const jokes = [
+
   "Why don't scientists trust atoms? Because they make up everything!",
   "Did you hear about the mathematician who’s afraid of negative numbers? He’ll stop at nothing to avoid them!",
   "Parallel lines have so much in common. It’s a shame they’ll never meet.",
@@ -22,12 +26,17 @@ const jokes = [
   "Why did the math book look sad? Because it had too many problems!",
   "What did one ocean say to the other ocean? Nothing, they just waved!",
   "What do you call cheese that isn't yours? Nacho cheese!",
-  "Why don't eggs tell jokes? Because they might crack up!",
+  "Why don't eggs tell jokes? Because they might crack up!"
 ];
 
 app.get("/jokes", (req, res) => {
   const randomJoke = jokes[Math.floor(Math.random() * jokes.length)];
   res.json({ joke: randomJoke });
+});
+
+app.get("/test", (req, res) => {
+  console.log("hello");
+  res.send("Test endpoint reached!");
 });
 
 app.listen(PORT, () => {
